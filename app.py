@@ -31,7 +31,7 @@ def ask():
 
         # Get OpenAI completion
         completion = openai.ChatCompletion.create(
-            model="gpt-4",  # You can use "gpt-3.5-turbo" for a more cost-efficient model
+            model="gpt-4-mini",  # You can use "gpt-3.5-turbo" for a more cost-efficient model
             messages=messages
         )
 
