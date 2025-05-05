@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI RPG Adventure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Top Bar -->
+    <div id="top-bar">
+      <div id="inventory">Inventory: Sword, Potion</div>
+      <div id="money">Gold: 100</div>
+    </div>
+
+    <!-- Story Text -->
+    <div id="story-text">
+      <p>Welcome, brave adventurer! Your story begins...</p>
+    </div>
+
+    <!-- Options -->
+    <div id="options"></div>
+
+    <!-- Custom Action -->
+    <div id="custom-action">
+      <input type="text" id="custom-input" placeholder="Type your action here...">
+      <button onclick="submitCustomAction()">Send</button>
+    </div>
+
+    <!-- Toolbar -->
+    <div id="toolbar">
+      <div class="toolbar-item">Sword</div>
+      <div class="toolbar-item">Potion</div>
+      <div class="toolbar-item">Shield</div>
+
+      <!-- Inventory button -->
+      <div id="inventory-button" onclick="toggleInventory()">🧳 Inventory</div>
+    </div>
+
+    <!-- Health and Mana Bars -->
+    <div id="status-bars">
+      <div id="health-bar">Health: <span id="health-value">100</span></div>
+      <div id="mana-bar">Mana: <span id="mana-value">50</span></div>
+    </div>
+
+    <!-- Inventory Popup -->
+    <div id="inventory-popup" class="hidden">
+      <h3>Inventory</h3>
+      <ul id="inventory-list">
+        <li>Sword</li>
+        <li>Potion</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
