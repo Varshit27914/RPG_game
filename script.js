@@ -1,3 +1,20 @@
+let missions = [];
+function updateMissions() {
+  const list = document.getElementById('missions-list');
+  list.innerHTML = '';
+  missions.forEach(mission => {
+    const li = document.createElement('li');
+    li.textContent = mission;
+    list.appendChild(li);
+  });
+}
+// If AI provides missions
+if (response.missions) {
+  missions = response.missions;
+  updateMissions();
+}
+
+
 function displayStory(story) {
   document.getElementById('story-text').innerHTML = `<p>${story}</p>`;
 }
@@ -53,25 +70,28 @@ function toggleInventory() {
 
 // Send action to backend / test simulation
 function sendOption(option) {
-  console.log("Sending option:", option);
+  fetch("http://your-server-url/ask", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: option })
+  })
+  .then(res => res.json())
+  .then(data => {
+    const response = JSON.parse(data.response);  // parse JSON string from AI
 
-  // Simulating AI API response
-  const response = {
-    story_text: `You chose to "${option}". Something interesting happens...`,
-    options: ["Option 1", "Option 2", "Option 3"],
-    inventory: ["Sword", "Potion", "Shield"],
-    money: 120,
-    player_stats: {
-      health: Math.floor(Math.random() * 100),
-      mana: Math.floor(Math.random() * 50)
+    displayStory(response.story_text);
+    displayOptions(response.options);
+    updateStats(response.player_stats);
+    updateInventory(response.inventory, response.money);
+
+    if (response.missions) {
+      missions = response.missions;
+      updateMissions();
     }
-  };
-
-  displayStory(response.story_text);
-  displayOptions(response.options);
-  updateStats(response.player_stats);
-  updateInventory(response.inventory, response.money);
+  })
+  .catch(err => console.error(err));
 }
+
 
 // Add toolbar item text to input box
 function bindToolbarClicks() {
@@ -101,4 +121,12 @@ function bindInventoryClicks() {
 window.onload = () => {
   bindToolbarClicks();
   bindInventoryClicks();
+  document.getElementById('add-mission-btn').addEventListener('click', () => {
+  const mission = prompt("Enter a new mission:");
+  if (mission) {
+    missions.push(mission);
+    updateMissions();
+  }
+});
+
 }
