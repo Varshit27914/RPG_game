@@ -3,7 +3,8 @@ from flask_cors import CORS
 import os
 import openai
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
+
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
 # OpenAI API setup
