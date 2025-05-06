@@ -1,5 +1,5 @@
 Flask==2.2.3
 Flask-Cors==5.0.1
-openai==0.27.0  # Ensure that this matches the version you need
-
+openai==0.27.0
 gunicorn==20.1.0
+Werkzeug==2.3.8
