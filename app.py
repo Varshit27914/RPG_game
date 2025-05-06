@@ -48,7 +48,7 @@ def ask():
 
         # Get OpenAI chat completion
         completion = openai.ChatCompletion.create(
-            model="gpt-4o",  # or "gpt-4-mini" if you prefer
+            model="gpt-4o-mini",  # or "gpt-4-mini" if you prefer
             messages=messages,
             temperature=0.7
         )
